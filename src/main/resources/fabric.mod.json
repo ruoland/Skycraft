@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "skycraftclient",
+  "version": "${version}",
+  "name": "SkycraftClient",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/skycraftclient/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.land.skycraftclient.client.SkycraftclientClient"
+    ],
+    "main": [
+      "org.land.skycraftclient.Skycraftclient"
+    ]
+  },
+  "mixins": [
+    "skycraftclient.mixins.json",
+    {
+      "config": "skycraftclient.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
