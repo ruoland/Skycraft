@@ -64,7 +64,6 @@ public class AnimationHandler {
 
         if(animationSet.getIdentifier(combo) == Animations.ANIMATION_STOP_SMOOTH)
         {
-            System.out.println("대체됨 부드러움");
             container.replaceAnimationWithFade(AbstractFadeModifier.functionalFadeIn(animationSet.getEndTick(), (modelName, type, value) -> value), null);
             PLAYER_ANIMATIONS.remove(playerEntity.getUuid());
             return;

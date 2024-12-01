@@ -1,4 +1,4 @@
-package org.land.skycraftclient.client.mixin.client;
+package org.land.skycraftclient.mixin;
 
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,5 +23,6 @@ public abstract class LivingEntityMixin {
             }
         }
     }
+
 
 }

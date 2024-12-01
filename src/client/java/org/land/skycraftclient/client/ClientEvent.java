@@ -2,38 +2,48 @@ package org.land.skycraftclient.client;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.Vec3d;
 import org.land.skycraftclient.client.animation.AnimationHandler;
 import org.land.skycraftclient.client.animation.AnimationSetting;
 import org.land.skycraftclient.client.animation.Animations;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientEvent {
+    public static double elytra_speed_config = 0.8f;
+    public static double vertical_acceleration = 0.1; // 수직 가속도 설정
+    public static double min_speed = 1.0; // 최소 속도 설정
+
     public void register(){
+
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             PlayerEntity playerEntity = minecraftClient.player;
             boolean isPlayer = playerEntity != null;
 
             if(isPlayer) {
-                boolean isFalling = playerEntity.fallDistance > 1 && !playerEntity.isOnGround() && !playerEntity.isFallFlying() && !playerEntity.isTouchingWater() && !playerEntity.hasStatusEffect(StatusEffects.LEVITATION);
+                boolean isFalling = playerEntity.fallDistance > 2 && !playerEntity.isOnGround() && !playerEntity.isFallFlying() && !playerEntity.isTouchingWater() && !playerEntity.hasStatusEffect(StatusEffects.LEVITATION);
                 if(isFalling && !playerEntity.isFallFlying()) {
                     if (!AnimationHandler.isPlaying(playerEntity)) {
                         AnimationHandler.playAnimation(playerEntity, AnimationSetting.SKY_DIVING_FIRST, 0);
                     }
                 }
-                if(playerEntity.isFallFlying() && AnimationHandler.isPlaying(playerEntity)){
-
+                if(playerEntity.isFallFlying() && AnimationHandler.isPlaying(playerEntity) || (AnimationHandler.isPlaying(playerEntity, AnimationSetting.SKY_DIVING_FIRST) && !isFalling)){
                     AnimationHandler.playAnimation(playerEntity, AnimationSetting.NONE_SMOOTH, 0);
                 }
-
-
             }
-
         });
-
     }
-
 }
