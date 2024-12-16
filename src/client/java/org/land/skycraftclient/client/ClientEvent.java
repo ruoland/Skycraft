@@ -1,18 +1,28 @@
 package org.land.skycraftclient.client;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModification;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.land.skycraftclient.client.animation.AnimationHandler;
 import org.land.skycraftclient.client.animation.AnimationSetting;
@@ -29,6 +39,13 @@ public class ClientEvent {
 
     public void register(){
 
+
+        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
+            ItemStack itemStack = playerEntity.getMainHandStack();
+            //if(itemStack.getItem() == Items.STICK && world.isClient)
+               // MinecraftClient.getInstance().setScreen(new ScreenCharacter(Text.literal("test")));
+            return TypedActionResult.success(playerEntity.getStackInHand(hand));
+        });
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             PlayerEntity playerEntity = minecraftClient.player;
             boolean isPlayer = playerEntity != null;
@@ -45,5 +62,8 @@ public class ClientEvent {
                 }
             }
         });
+
+
+
     }
 }

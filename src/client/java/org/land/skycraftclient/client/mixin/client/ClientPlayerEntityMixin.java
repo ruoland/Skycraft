@@ -6,6 +6,8 @@ import dev.kosmx.playerAnim.api.layered.ModifierLayer;
 import dev.kosmx.playerAnim.api.layered.modifier.MirrorModifier;
 import dev.kosmx.playerAnim.api.layered.modifier.SpeedModifier;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import org.land.skycraftclient.client.ISkyAnimatedPlayer;
@@ -36,6 +38,8 @@ public class ClientPlayerEntityMixin implements ISkyAnimatedPlayer {
         PlayerAnimationAccess.getPlayerAnimLayer((AbstractClientPlayerEntity) (Object) this).addAnimLayer(130000, modMirrorAnimationContainer);
         //The priority will tell, how important is this animation compared to other mods. Higher number means higher priority
         //Mods with higher priority will override the lower priority mods (if they want to animation anything)
+
+
     }
 
 
