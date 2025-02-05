@@ -31,6 +31,11 @@ repositories {
 
     maven { url "https://maven.kosmx.dev/" }
     maven { url "https://api.modrinth.com/maven" }
+    maven {
+        name = "Ladysnake Mods"
+        url = 'https://maven.ladysnake.org/releases'
+    }
+
 }
 
 dependencies {
@@ -48,7 +53,12 @@ dependencies {
     // player-animation-lib 의존성 수정
     modImplementation "dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim_version}"
     include "dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim_version}"
-
+    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+    modImplementation "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
+    // Copy the following only if you want to bundle Cardinal Components API as a Jar-in-Jar dependency
+    // (otherwise, you should configure the dependency on Modrinth/Curseforge)
+    include "org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}"
+    include "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
 }
 
 processResources {

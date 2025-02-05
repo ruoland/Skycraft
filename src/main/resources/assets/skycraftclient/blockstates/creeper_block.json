@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "skycraftclient:block/creeper_block" }
+  }
+}

@@ -2,30 +2,20 @@ package org.land.skycraftclient;
 
 import com.google.common.collect.Lists;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+
+import static org.land.skycraftclient.Skycraftclient.SKILLS;
 
 
-public class ServerEvent {
+public class ElytraEvent {
     public static double elytra_speed_config = 0.6f;
     public static double vertical_acceleration = 0.05; // 수직 가속도 설정
     private static final int COLLISION_TICK = 5;//5틱에 한번만 겉날개 넉백 처리 계산함
@@ -35,12 +25,14 @@ public class ServerEvent {
                 server -> {
                     tick++;
                     for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
-                        if(tick > COLLISION_TICK){
-                            checkEvent(player);
-                            tick = 0;
-                        }
-                        if (player.isFallFlying()) {
-                            adjustElytraFlight(player);
+                        if(SKILLS.get(player).hasSkillLevel("돌진", 0)) {
+                            if (tick > COLLISION_TICK && player.isFallFlying()) {
+                                checkEvent(player);
+                                tick = 0;
+                            }
+                            if (player.isFallFlying()) {
+                                adjustElytraFlight(player);
+                            }
                         }
                     }
                 }
@@ -49,7 +41,6 @@ public class ServerEvent {
 
     }
     public void checkEvent(PlayerEntity player){
-
         {
             Box box;
             if (player.hasVehicle() && !player.getVehicle().isRemoved()) {

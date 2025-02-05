@@ -4,7 +4,8 @@
   "package": "org.land.skycraftclient.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "EndermanEntityMixin"
   ],
 
   "injectors": {

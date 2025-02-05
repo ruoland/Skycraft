@@ -1,12 +1,8 @@
-package org.land.skycraftclient;
+package org.land.skycraftclient.island.boundary;
 
 
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -15,11 +11,9 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.ChunkPos;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -34,9 +28,9 @@ public class IslandManager {
             if(playerEntity.getStackInHand(hand).getItem() == Items.STICK){
                 if(world instanceof ServerWorld serverWorld) {
                     BlockPos startPos = playerEntity.getSteppingPos(); // 시작 위치
-                    Pair<BlockPos, BlockPos> boundary = IslandBoundaryDetector.detectIslandBoundary(serverWorld, startPos);
+                    Pair<BlockPos, BlockPos> boundary = OldIslandBoundaryDetector.detectIslandBoundary(serverWorld, startPos);
                     ISLAND_MAP.put(boundary, playerEntity.getUuid());
-                    //IslandBoundaryDetector.createBoundingBox(serverWorld, boundary);
+                    //OldIslandBoundaryDetector.createBoundingBox(serverWorld, boundary);
                 }
             }
             return TypedActionResult.pass(playerEntity.getStackInHand(hand));

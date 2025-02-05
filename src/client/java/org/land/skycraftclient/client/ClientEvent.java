@@ -3,6 +3,7 @@ package org.land.skycraftclient.client;
 import net.fabricmc.fabric.api.biome.v1.BiomeModification;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRenderEvents;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
@@ -38,6 +39,7 @@ public class ClientEvent {
     public static double min_speed = 1.0; // 최소 속도 설정
 
     public void register(){
+
 
 
         UseItemCallback.EVENT.register((playerEntity, world, hand) -> {

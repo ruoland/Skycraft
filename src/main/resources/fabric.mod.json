@@ -5,6 +5,12 @@
   "name": "SkycraftClient",
   "description": "",
   "authors": [],
+  "custom": {
+    "cardinal-components": [
+      "skycraftclient:skills"
+    ]
+  },
+
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/skycraftclient/icon.png",
@@ -14,6 +20,9 @@
       "org.land.skycraftclient.client.SkycraftclientClient"
     ],
     "main": [
+      "org.land.skycraftclient.Skycraftclient"
+    ],
+    "cardinal-components": [
       "org.land.skycraftclient.Skycraftclient"
     ]
   },

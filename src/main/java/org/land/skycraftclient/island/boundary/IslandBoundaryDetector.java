@@ -1,24 +1,21 @@
-package org.land.skycraftclient;
+package org.land.skycraftclient.island.boundary;
 
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.math.ChunkPos;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class IslandBoundaryDetector {
     private static final int[][] DIRECTIONS = {
-            {1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1}
+        {1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1}
     };
-    public static Pair<BlockPos, BlockPos> detectIslandBoundary(ServerWorld world, BlockPos startPos) {
+
+    public static Set<BlockPos> detectIslandBoundary(ServerWorld world, BlockPos startPos) {
         Queue<BlockPos> queue = new LinkedList<>();
         Set<BlockPos> visited = new HashSet<>();
         Set<BlockPos> boundary = new HashSet<>();
-        Set<ChunkPos> checkedChunks = new HashSet<>();
 
         queue.offer(startPos);
 
@@ -26,10 +23,6 @@ public class IslandBoundaryDetector {
             BlockPos pos = queue.poll();
             if (visited.contains(pos)) continue;
             visited.add(pos);
-
-            ChunkPos chunkPos = new ChunkPos(pos);
-            if (checkedChunks.contains(chunkPos)) continue;
-            checkedChunks.add(chunkPos);
 
             boolean isBoundary = false;
             for (int[] dir : DIRECTIONS) {
@@ -44,15 +37,8 @@ public class IslandBoundaryDetector {
             if (isBoundary) boundary.add(pos);
         }
 
-        BlockPos minPos = startPos, maxPos = startPos;
-
-        for (BlockPos pos : boundary) {
-            minPos = BlockPos.min(minPos, pos);
-            maxPos = BlockPos.max(maxPos, pos);
-        }
-        return new Pair<>(minPos, maxPos);
+        return boundary;
     }
-
 
     private static boolean isAir(ServerWorld world, BlockPos pos) {
         return world.getBlockState(pos).isAir();
@@ -107,4 +93,13 @@ public class IslandBoundaryDetector {
         }
     }
 
+    public static void main(String[] args) {
+        // 예제 사용 (서버 환경에서 실행)
+        ServerWorld world = null; // 서버 월드 객체를 여기에 할당
+        BlockPos startPos = new BlockPos(0, 64, 0); // 시작 위치
+
+        Set<BlockPos> boundary = detectIslandBoundary(world, startPos);
+        createBoundingBox(world, boundary);
+        System.out.println("Island bounding box created");
+    }
 }
