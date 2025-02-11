@@ -5,7 +5,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityMixin",
-    "EndermanEntityMixin"
+    "EndermanEntityMixin",
+    "PlayerEntityMixin",
+    "EntityMixin",
+    "ServerPlayerEntityMixin"
   ],
 
   "injectors": {

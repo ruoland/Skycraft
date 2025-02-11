@@ -3,7 +3,6 @@ package org.land.skycraftclient.block;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
@@ -23,14 +22,15 @@ public class CreeperBlockEntity extends BlockEntity {
         super.writeNbt(nbt, registryLookup);
 
         nbt.putFloat("scale", scale);
+
         nbt.putFloat("yaw", yaw);
-        System.out.println(scale +" 입력됨");
+
     }
     public void sync() {
         if (world != null && !world.isClient()) {
             BlockEntityUpdateS2CPacket packet = BlockEntityUpdateS2CPacket.create(this);
             PlayerLookup.tracking(this).forEach(player ->
-                    ((ServerPlayerEntity) player).networkHandler.sendPacket(packet));
+                    player.networkHandler.sendPacket(packet));
         }
     }
 

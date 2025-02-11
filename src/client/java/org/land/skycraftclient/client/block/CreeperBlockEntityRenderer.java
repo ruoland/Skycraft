@@ -10,6 +10,7 @@ import net.minecraft.client.render.entity.model.CreeperEntityModel;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.data.client.Models;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
