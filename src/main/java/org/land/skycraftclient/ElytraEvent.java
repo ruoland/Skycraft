@@ -10,6 +10,11 @@ import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import org.land.skycraftclient.db.Skill;
+import org.land.skycraftclient.skill.Skills;
+import tschipp.carryon.CarryOnCommon;
+import tschipp.carryon.common.carry.CarryOnData;
+import tschipp.carryon.common.carry.CarryOnDataManager;
 
 import java.util.Iterator;
 import java.util.List;
@@ -27,7 +32,9 @@ public class ElytraEvent {
                 server -> {
                     tick++;
                     for (PlayerEntity player : server.getPlayerManager().getPlayerList()) {
-
+                        if(player.isFallFlying()) {
+                            checkEvent(player);
+                        }
                     }
 
                 }

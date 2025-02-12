@@ -39,8 +39,16 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
-
-
+    maven {
+        name = "SmartBrainLib (SBL) Maven Repo"
+        url = "https://dl.cloudsmith.io/public/tslat/sbl/maven/"
+    }
+    maven {
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        url "https://maven.siphalor.de/"
+    }
 }
 
 dependencies {
@@ -66,6 +74,10 @@ dependencies {
     include "org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}"
     implementation group: 'com.mysql', name: 'mysql-connector-j', version: '9.1.0'
 
+    include group: 'com.mysql', name: 'mysql-connector-j', version: '9.1.0'
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+    include 'com.zaxxer:HikariCP:5.0.1'
+    modImplementation "tschipp.carryon:carryon-fabric-1.21.1:2.2.3.2"
     modImplementation "dev.emi:trinkets:3.10.0"
 }
 

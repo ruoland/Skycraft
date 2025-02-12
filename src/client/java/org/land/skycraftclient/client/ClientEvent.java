@@ -40,14 +40,6 @@ public class ClientEvent {
 
     public void register(){
 
-
-
-        UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
-            ItemStack itemStack = playerEntity.getMainHandStack();
-            //if(itemStack.getItem() == Items.STICK && world.isClient)
-               // MinecraftClient.getInstance().setScreen(new ScreenCharacter(Text.literal("test")));
-            return TypedActionResult.success(playerEntity.getStackInHand(hand));
-        });
         ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
             PlayerEntity playerEntity = minecraftClient.player;
             boolean isPlayer = playerEntity != null;

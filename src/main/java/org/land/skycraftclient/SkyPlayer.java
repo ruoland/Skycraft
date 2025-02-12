@@ -2,10 +2,9 @@ package org.land.skycraftclient;
 
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.text.Text;
 import org.land.skycraftclient.db.DBManager;
 import org.land.skycraftclient.db.Skill;
+
 import org.land.skycraftclient.skill.PlayerSkill;
 import org.land.skycraftclient.skill.PlayerSkillManager;
 
@@ -42,15 +41,13 @@ public class SkyPlayer {
         }
     }
 
-    public void useSkill(Skill skill, int exp){
-        playerSkillManager.useSkill(skill, exp);
     }
     public PlayerSkillManager getPlayerSkills() {
         return playerSkillManager;
     }
 
-    public boolean hasSkill(Skill skillName) {
-        return playerSkillManager.hasSkill(skillName);
+    public boolean hasSkill(Skill skill) {
+        return playerSkillManager.hasSkill(skill);
     }
 
 }

@@ -1,10 +1,12 @@
 package org.land.skycraftclient.db;
 
 
+import net.minecraft.entity.player.PlayerEntity;
 import org.land.skycraftclient.SkyPlayer;
 
 public abstract class Skill {
     private String name, description;
+
     private int id;
 
     private int defaultCooldown = 0;
@@ -13,6 +15,7 @@ public abstract class Skill {
         this.description = description;
         return this;
     }
+
 
     public Skill setId(int id) {
         this.id = id;
@@ -31,7 +34,7 @@ public abstract class Skill {
         return name;
     }
 
-    public abstract void onUse(SkyPlayer player);
+    public abstract void onUse(PlayerEntity player);
 
     public int getDefaultCooldown() {
         return defaultCooldown;
@@ -42,7 +45,7 @@ public abstract class Skill {
         return this;
     }
 
-    public Skill setName(String name) {
+    public Skill setLocalizationName(String name) {
         this.name = name;
         return this;
     }

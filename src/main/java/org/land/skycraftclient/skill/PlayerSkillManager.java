@@ -1,6 +1,7 @@
 package org.land.skycraftclient.skill;
 
 
+import net.minecraft.entity.player.PlayerEntity;
 import org.land.skycraftclient.db.Skill;
 
 import java.util.*;
@@ -18,35 +19,25 @@ public class PlayerSkillManager {
         skills.put(skill.getName(), new PlayerSkill(skill));
     }
 
-    public void useSkill(Skill skillName, int exp) {
-        PlayerSkill skill = skills.get(skillName.getName());
-        if (skill != null) {
-            skill.use();
-            skill.addExperience(exp);
-            skill.setCooldown(skill.getCooldown());
-        }
-    }
-
-    public Map<String, PlayerSkill> getSkills() {
-        return skills;
-    }
-
-    public void updateSkillLevel(String skillName, int newLevel) {
+    public boolean canUseSkill(String skillName) {
         PlayerSkill skill = skills.get(skillName);
         if (skill != null) {
-            skill.setLevel(newLevel);
+            return skill.isReady();
+        }
+        return false;
+    }
+
+    public void useSkill(PlayerEntity player, Skill paramSkill) {
+        PlayerSkill skill = skills.get(paramSkill.getName());
+        if (skill != null && skill.isReady()) {
+            skill.updateLastUsedTime();
+            skill.use(player);
+            skill.addExperience(10);
+
+
         }
     }
 
-    public void updateSkillCooldown(String skillName, long newCooldown) {
-        PlayerSkill skill = skills.get(skillName);
-        if (skill != null) {
-            skill.setCooldown(newCooldown);
-        }
-    }
-    public void useSkill(Skill skill){
-        getSkill(skill).use();
-    }
 
     public boolean hasSkill(Skill skillName) {
         return skills.containsKey(skillName.getName());
@@ -60,7 +51,5 @@ public class PlayerSkillManager {
         return new ArrayList<>(skills.values());
     }
 
-    public UUID getPlayerUUID() {
-        return playerUUID;
-    }
+
 }

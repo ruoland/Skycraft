@@ -4,13 +4,12 @@
   "package": "org.land.skycraftclient.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LivingEntityMixin",
     "EndermanEntityMixin",
-    "PlayerEntityMixin",
-    "EntityMixin",
-    "ServerPlayerEntityMixin"
+    "MobEntityAccessor",
+    "LivingEntityMixin",
+    "ServerPlayerEntityMixin",
+    "SpiderMixin"
   ],
-
   "injectors": {
     "defaultRequire": 1
   }
