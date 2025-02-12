@@ -1,11 +1,8 @@
 package org.land.skycraftclient;
 
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.text.Text;
 import org.land.skycraftclient.db.DBManager;
-import org.land.skycraftclient.db.Skill;
+import org.land.skycraftclient.skill.Skill;
 import org.land.skycraftclient.skill.PlayerSkill;
 import org.land.skycraftclient.skill.PlayerSkillManager;
 

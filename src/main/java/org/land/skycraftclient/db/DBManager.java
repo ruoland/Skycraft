@@ -4,13 +4,13 @@ import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 import org.land.skycraftclient.SkyPlayer;
 import org.land.skycraftclient.skill.PlayerSkill;
 import org.land.skycraftclient.skill.PlayerSkillManager;
+import org.land.skycraftclient.skill.Skill;
 import org.land.skycraftclient.skill.Skills;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.UUID;
-import java.util.logging.Level;
 
 public class DBManager {
     private MysqlConnectionPoolDataSource dataSource;

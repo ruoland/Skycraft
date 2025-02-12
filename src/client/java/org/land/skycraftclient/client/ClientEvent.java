@@ -28,6 +28,8 @@ import net.minecraft.util.math.Vec3d;
 import org.land.skycraftclient.client.animation.AnimationHandler;
 import org.land.skycraftclient.client.animation.AnimationSetting;
 import org.land.skycraftclient.client.animation.Animations;
+import org.land.skycraftclient.skill.PlayerSkillManager;
+import org.land.skycraftclient.skill.Skills;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class ClientEvent {
                 if(playerEntity.isFallFlying() && AnimationHandler.isPlaying(playerEntity) || (AnimationHandler.isPlaying(playerEntity, AnimationSetting.SKY_DIVING_FIRST) && !isFalling)){
                     AnimationHandler.playAnimation(playerEntity, AnimationSetting.NONE_SMOOTH, 0);
                 }
+
             }
         });
 

@@ -1,8 +1,6 @@
 package org.land.skycraftclient.skill;
 
 
-import org.land.skycraftclient.db.Skill;
-
 import java.util.*;
 
 public class PlayerSkillManager {

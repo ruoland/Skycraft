@@ -2,8 +2,6 @@ package org.land.skycraftclient.skill;
 
 
 
-import org.land.skycraftclient.db.Skill;
-
 import java.util.TreeMap;
 
 public class Skills {

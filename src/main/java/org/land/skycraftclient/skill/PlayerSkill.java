@@ -1,8 +1,6 @@
 package org.land.skycraftclient.skill;
 
 
-import org.land.skycraftclient.db.Skill;
-
 public class PlayerSkill {
     private Skill skill;
     private int level;
