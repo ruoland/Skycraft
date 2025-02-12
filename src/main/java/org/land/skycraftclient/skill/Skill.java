@@ -1,4 +1,4 @@
-package org.land.skycraftclient.db;
+package org.land.skycraftclient.skill;
 
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,11 +8,14 @@ public abstract class Skill {
     private String name, description;
 
     private int id;
+    private int key;
+
 
     private int defaultCooldown = 0;
 
     public Skill setDescription(String description) {
         this.description = description;
+
         return this;
     }
 
@@ -50,6 +53,10 @@ public abstract class Skill {
         return this;
     }
 
+    public Skill setKey( int keycode){
+        this.key = keycode;
+        return this;
+    }
     @Override
     public String toString() {
         return "Skill{" +
@@ -59,6 +66,7 @@ public abstract class Skill {
                 ", defaultCooldown=" + defaultCooldown +
                 '}';
     }
+
 }
 
 
